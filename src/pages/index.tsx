@@ -1,12 +1,14 @@
 import { type NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const hello = api.example.hello.useQuery({
+    text: "world",
+  });
 
   return (
     <>
@@ -26,7 +28,7 @@ const Home: NextPage = () => {
               href="https://create.t3.gg/en/usage/first-steps"
               target="_blank"
             >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
+              <h3 className="text-2xl font-bold"></h3>
               <div className="text-lg">
                 Just the basics - Everything you need to know to set up your
                 database and authentication.
@@ -63,7 +65,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined },
+    { enabled: sessionData?.user !== undefined }
   );
 
   return (

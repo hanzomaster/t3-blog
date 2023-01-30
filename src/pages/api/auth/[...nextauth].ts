@@ -1,5 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import CredentialProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
@@ -7,6 +8,10 @@ import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
 
 export const authOptions: NextAuthOptions = {
+  session: {
+    maxAge: 24 * 60 * 60, // 24 hours
+    strategy: "jwt",
+  },
   // Include user.id on session
   callbacks: {
     session({ session, user }) {
@@ -19,9 +24,39 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    GithubProvider({
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    }),
+    CredentialProvider({
+      name: "Credentials",
+      type: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "me@email.com" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+        // check if user exists
+        const user = await prisma.user.findUnique({
+          where: {
+            email,
+          },
+        });
+        if (!user) {
+          return null;
+        }
+        // check if password is correct
+        const isPasswordCorrect = true;
+        if (!isPasswordCorrect) {
+          return null;
+        }
+        // return user
+        return user;
+      },
     }),
     /**
      * ...add more providers here
