@@ -13,7 +13,7 @@ module.exports = {
         textNavbar: "#757575",
         topicHover: "#E6E6E6",
         topic: "#f2f2f2",
-        
+
       },
     },
   },

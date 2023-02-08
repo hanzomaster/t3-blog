@@ -1,11 +1,10 @@
+import { Menu, Transition } from "@headlessui/react";
 import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, Fragment, useState, useEffect } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Fragment } from "react";
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
