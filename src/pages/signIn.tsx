@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Image from "next/image";
-import { useForm, SubmitHandler } from "react-hook-form";
 
 const SignIn: NextPage = () => {
   //sign in with google

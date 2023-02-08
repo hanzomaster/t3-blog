@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Image from "next/image";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 interface IFormInput {
   name: string;
@@ -52,7 +52,7 @@ const SignUp: NextPage = () => {
               className="rounded-lg  border border-[#e6e6e6] px-2  py-2 "
               {...register("name", { required: true })}
             />
-            {errors.name && errors.name.type == "required" && (
+            {errors.name && errors.name.type === "required" && (
               <span className="text-red-600">This field is required</span>
             )}
           </div>
@@ -71,10 +71,10 @@ const SignUp: NextPage = () => {
                 },
               })}
             />
-            {errors.email && errors.email.type == "required" && (
+            {errors.email && errors.email.type === "required" && (
               <span className="text-red-600">This field is required</span>
             )}
-            {errors.email && errors.email.type == "pattern" && (
+            {errors.email && errors.email.type === "pattern" && (
               <span className="text-red-600">{errors.email.message}</span>
             )}
           </div>
@@ -94,10 +94,10 @@ const SignUp: NextPage = () => {
                 },
               })}
             />
-            {errors.password && errors.password.type == "required" && (
+            {errors.password && errors.password.type === "required" && (
               <span className="text-red-600">This field is required</span>
             )}
-            {errors.password && errors.password.type == "minLength" && (
+            {errors.password && errors.password.type === "minLength" && (
               <span className="text-red-600">{errors.password.message}</span>
             )}
           </div>
@@ -115,11 +115,11 @@ const SignUp: NextPage = () => {
             />
           </div>
           {errors.confirmPassword &&
-            errors.confirmPassword.type == "required" && (
+            errors.confirmPassword.type === "required" && (
               <span className="text-red-600">This field is required</span>
             )}
           {errors.confirmPassword &&
-            errors.confirmPassword.type == "validate" && (
+            errors.confirmPassword.type === "validate" && (
               <span className="text-red-600">
                 {errors.confirmPassword.message}
               </span>
