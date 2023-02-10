@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
+import Brand from "../../components/Brand";
 
 interface IFormInput {
   name: string;
@@ -13,7 +13,6 @@ const SignUp: NextPage = () => {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm<IFormInput>();
 
@@ -27,16 +26,7 @@ const SignUp: NextPage = () => {
       <div className="mx-10 h-screen max-w-full bg-white sm:mx-32">
         <div className="flex h-28 max-w-full items-center justify-center">
           <div className="flex items-center justify-between">
-            <Image
-              src="/logo.png"
-              alt="logo"
-              className="object-cover "
-              width={100}
-              height={100}
-            />
-            <h1 className="font-pacifico text-4xl not-italic leading-[7rem] text-black/80 md:text-6xl">
-              Infinity
-            </h1>
+            <Brand />
           </div>
         </div>
 

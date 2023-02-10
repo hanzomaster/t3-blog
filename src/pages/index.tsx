@@ -5,6 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
+import Brand from "../components/Brand";
 import { api } from "../utils/api";
 
 const Home: NextPage = () => {
@@ -18,25 +19,13 @@ const Home: NextPage = () => {
       <main className="h-screen max-w-full bg-white">
         <div className=" mx-5 h-screen max-w-full bg-white md:mx-20 xl:mx-48">
           <div className="flex h-28 items-center justify-between">
-            <div className="flex w-auto items-center justify-between">
-              <Image
-                src="/logo.png"
-                alt="logo"
-                className="object-cover "
-                width={100}
-                height={100}
-              />
-              <h1 className="font-pacifico text-4xl not-italic leading-[7rem] text-black/80 md:text-5xl lg:text-6xl">
-                Infinity
-              </h1>
-            </div>
-
+            <Brand />
             <div className="hidden items-center justify-between font-montserrat sm:flex sm:w-48 md:w-52 lg:w-80">
               <button className="text-lg font-normal md:text-xl lg:text-2xl">
-                <Link href="/signIn">Sign in</Link>
+                <Link href="/auth/signin">Sign in</Link>
               </button>
               <button className="rounded-full bg-button px-3 py-2 text-lg font-normal text-white md:text-xl lg:px-5 lg:text-2xl">
-                <Link href="/signUp">Sign up</Link>
+                <Link href="/auth/signup">Sign up</Link>
               </button>
             </div>
 
@@ -78,7 +67,7 @@ const Home: NextPage = () => {
                               active ? "bg-button text-white" : "text-gray-900"
                             } group flex w-full items-center rounded-md px-2 py-2 text-base`}
                           >
-                            <Link href="/signUp">Sign up</Link>
+                            <Link href="/auth/signup">Sign up</Link>
                           </button>
                         )}
                       </Menu.Item>
@@ -91,7 +80,7 @@ const Home: NextPage = () => {
                               active ? "bg-button text-white" : "text-gray-900"
                             } group flex w-full items-center rounded-md px-2 py-2 text-base`}
                           >
-                            <Link href="/signIn">Sign in</Link>
+                            <Link href="/auth/signin">Sign in</Link>
                           </button>
                         )}
                       </Menu.Item>
