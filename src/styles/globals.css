@@ -3,3 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown > * {
+  all: revert;
+}
+.foo {
+  white-space: "pre-wrap";
+}
