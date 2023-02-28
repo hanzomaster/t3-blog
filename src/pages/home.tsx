@@ -6,12 +6,16 @@ import Image from "next/image";
 import Content from "../components/Content";
 import LeftContent from "../components/LeftContent";
 import RightContent from "../components/RightContent";
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
+  // const { data: session } = useSession();
+
   return (
     <Layout>
       <Navbar />
       <Content>
+        {/* {session ? <h1>Sign in</h1> : <h1>Sign out</h1>} */}
         <LeftContent>
           {Posts.map((post) => {
             return (

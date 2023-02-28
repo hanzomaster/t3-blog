@@ -2,6 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 export default function Navbar() {
   return (
@@ -229,6 +230,9 @@ function Dropdown() {
                     className={`${
                       active ? "bg-slate-100" : "text-textNavbar"
                     } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
+                    onClick={() => {
+                      signOut({ callbackUrl: "http://localhost:3000" });
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
