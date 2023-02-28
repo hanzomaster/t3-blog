@@ -1,12 +1,12 @@
 import type {
   GetServerSidePropsContext,
-  InferGetServerSidePropsType
+  InferGetServerSidePropsType,
 } from "next";
 import {
   getCsrfToken,
   getProviders,
   getSession,
-  signIn
+  signIn,
 } from "next-auth/react";
 import { type FormEvent } from "react";
 
@@ -41,9 +41,9 @@ function SignIn({
         onSubmit={(e: FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           void signIn("credentials", {
-            redirect: false,
             email: e.currentTarget.email.value,
             password: e.currentTarget.password.value,
+            callbackUrl: "/home",
           });
         }}
       >
@@ -97,7 +97,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // Note: Make sure not to redirect to the same page
   // To avoid an infinite loop!
   if (session) {
-    return { redirect: { destination: "/" } };
+    return { redirect: { destination: "/", permanent: false } };
   }
 
   const providers = await getProviders();
