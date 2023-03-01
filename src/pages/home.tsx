@@ -1,12 +1,13 @@
-import { type NextPage } from "next";
-import Layout from "../components/Layout";
-import Navbar from "../components/Navbar";
-import Posts from "../data/posts";
+import { type GetServerSidePropsContext, type NextPage } from "next";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Content from "../components/Content";
+import Layout from "../components/Layout";
 import LeftContent from "../components/LeftContent";
+import Navbar from "../components/Navbar";
 import RightContent from "../components/RightContent";
 import { useSession } from "next-auth/react";
+import Posts from "../data/posts";
 
 const Home: NextPage = () => {
   // const { data: session } = useSession();
@@ -78,4 +79,16 @@ export default Home;
 
 function getWordStr(str: string) {
   return str.split(/\s+/).slice(0, 50).join(" ");
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession(context);
+
+  // If the user is already logged in, redirect.
+  // Note: Make sure not to redirect to the same page
+  // To avoid an infinite loop!
+  if (!session) {
+    return { redirect: { destination: "/auth/signin", permanent: false } };
+  }
+  return { props: { session } };
 }
