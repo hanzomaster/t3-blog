@@ -2,10 +2,11 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div>
+    <div className="">
       <div className="flex h-28 w-full items-center justify-between">
         <div className="flex items-center gap-2">
           <Image
@@ -148,7 +149,8 @@ function Dropdown() {
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link
+                    href="/account"
                     className={`${
                       active ? "bg-slate-100" : "text-textNavbar"
                     } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
@@ -168,7 +170,7 @@ function Dropdown() {
                       />
                     </svg>
                     Profile
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
               <Menu.Item>

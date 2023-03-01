@@ -6,6 +6,7 @@ import Image from "next/image";
 import Content from "../components/Content";
 import LeftContent from "../components/LeftContent";
 import RightContent from "../components/RightContent";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -15,7 +16,7 @@ const Home: NextPage = () => {
         <LeftContent>
           {Posts.map((post) => {
             return (
-              <div key={post.id}>
+              <Link href={`/post/${post.id}`} key={post.id}>
                 <div className="flex items-center gap-6 ">
                   <div className="rounded-full ">
                     <Image
@@ -55,7 +56,7 @@ const Home: NextPage = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </LeftContent>

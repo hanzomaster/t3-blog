@@ -1,21 +1,44 @@
+import Link from "next/link";
+
 export default function Options() {
   return (
     <nav className="flex gap-10">
       {Items.map((item) => {
         return (
-          <div
+          <Link
+            href={item.link}
             key={item.name}
             className="flex rounded-md py-2 px-2 text-textNavbar hover:bg-slate-100 lg:px-4"
           >
             <div>{item.icon}</div>
             <span className="ml-2">{item.name}</span>
-          </div>
+          </Link>
         );
       })}
     </nav>
   );
 }
 const Items = [
+  {
+    name: "Profile",
+    link: "/account",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="h-6 w-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+        />
+      </svg>
+    ),
+  },
   {
     name: "Stories",
     link: "/account/stories",
