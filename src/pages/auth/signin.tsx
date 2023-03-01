@@ -97,7 +97,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // Note: Make sure not to redirect to the same page
   // To avoid an infinite loop!
   if (session) {
-    return { redirect: { destination: "/", permanent: false } };
+    return { redirect: { destination: "/home", permanent: false } };
   }
 
   const providers = await getProviders();
