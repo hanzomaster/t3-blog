@@ -5,6 +5,12 @@ generator client {
     provider = "prisma-client-js"
 }
 
+generator erd {
+    provider                  = "prisma-erd-generator"
+    output                    = "erd.pdf"
+    includeRelationFromFields = true
+}
+
 datasource db {
     provider     = "mysql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
@@ -16,22 +22,54 @@ datasource db {
 }
 
 model Post {
-    id          String     @id @default(cuid())
+    id          String      @id @default(cuid())
     title       String
     description String?
-    content     String     @db.Text
-    published   Boolean    @default(false)
+    postTopic   PostTopic[]
+    content     String      @db.Text
+    published   Boolean     @default(false)
     authorId    String
     comment     Comment[]
     reaction    Reaction[]
-    createdAt   DateTime   @default(now())
-    updatedAt   DateTime   @updatedAt
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
     report      Report[]
     readList    ReadList[]
 
     author User @relation(fields: [authorId], references: [id])
 
     @@index([authorId])
+}
+
+model Topic {
+    id        String      @id @default(cuid())
+    name      String      @unique
+    postTopic PostTopic[]
+    userTopic UserTopic[]
+}
+
+model PostTopic {
+    postId  String
+    topicId String
+
+    post  Post  @relation(fields: [postId], references: [id])
+    topic Topic @relation(fields: [topicId], references: [id])
+
+    @@id([postId, topicId])
+    @@index([postId])
+    @@index([topicId])
+}
+
+model UserTopic {
+    userId  String
+    topicId String
+
+    user  User  @relation(fields: [userId], references: [id])
+    topic Topic @relation(fields: [topicId], references: [id])
+
+    @@id([userId, topicId])
+    @@index([userId])
+    @@index([topicId])
 }
 
 model Reaction {
@@ -106,25 +144,26 @@ model Session {
 }
 
 model User {
-    id            String     @id @default(cuid())
+    id            String      @id @default(cuid())
     name          String?
-    email         String?    @unique
+    email         String?     @unique
     emailVerified DateTime?
     password      String?
     image         String?
-    role          Role       @default(USER)
-    status        Status     @default(ACTIVE)
+    role          Role        @default(USER)
+    status        Status      @default(ACTIVE)
     accounts      Account[]
-    followedBy    Follows[]  @relation("following")
-    following     Follows[]  @relation("follower")
+    followedBy    Follows[]   @relation("following")
+    following     Follows[]   @relation("follower")
     post          Post[]
     reaction      Reaction[]
     comment       Comment[]
     sessions      Session[]
-    registerdAt   DateTime   @default(now())
-    profile       Profile?
+    registerdAt   DateTime    @default(now())
+    bio           String?
     report        Report[]
     readList      ReadList[]
+    userTopic     UserTopic[]
 }
 
 model ReadList {
@@ -151,13 +190,6 @@ enum Status {
     ACTIVE
     INACTIVE
     DELETED
-}
-
-model Profile {
-    id     String  @id @default(cuid())
-    bio    String?
-    user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String  @unique
 }
 
 model Follows {
