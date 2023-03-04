@@ -1,7 +1,6 @@
 import {
   GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-  type NextPage,
+  type InferGetServerSidePropsType,
 } from "next";
 import {
   getCsrfToken,
@@ -19,9 +18,6 @@ function SignIn({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   //sign in with google
 
-  async function handleLoginGithub() {
-    await signIn("github", { callbackUrl: "/" });
-  }
   return (
     <Layout>
       <div className="flex h-28 max-w-full items-center justify-center">

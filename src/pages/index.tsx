@@ -7,7 +7,6 @@ import { Fragment } from "react";
 import Brand from "../components/Brand";
 import Layout from "../components/Layout";
 import { api } from "../utils/api";
-
 const Home: NextPage = () => {
   return (
     <>

@@ -14,9 +14,10 @@ module.exports = {
         topicHover: "#E6E6E6",
         topic: "#f2f2f2",
         title: "rgba(0, 0, 0, 0.8)",
-        textBio: "#757575"
+        titleHover: "rgba(0, 0, 0, 0.6)",
+        textBio: "#757575",
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require("@tailwindcss/typography")],
 };

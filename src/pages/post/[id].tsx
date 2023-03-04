@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import RightContent from "../../components/RightContent";
 import Markdown from "../../components/Markdown";
+import parse from "html-react-parser";
 
 const Post = () => {
   const router = useRouter();
@@ -102,13 +103,7 @@ const Post = () => {
             <h1 className="py-5 text-2xl font-[700] text-title md:py-10 md:text-4xl lg:text-5xl">
               {post?.title}
             </h1>
-            <ReactMarkdown
-              className="foo prose prose-base md:prose-lg"
-              components={Markdown}
-              remarkPlugins={[remarkGfm]}
-            >
-              {post?.content}
-            </ReactMarkdown>
+            {parse((post?.content as string) || "")}
           </div>
         </div>
         <RightContent>

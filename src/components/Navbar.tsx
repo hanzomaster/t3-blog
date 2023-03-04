@@ -7,16 +7,18 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <div className="">
-      <div className="flex h-28 w-full items-center justify-between">
+      <div className="flex h-28 items-center justify-between">
         <div className="flex items-center gap-2">
-          <Image
-            src="/logo.png"
-            width={80}
-            height={80}
-            className="object-cover"
-            alt="logo"
-          />
-          <div className="hidden h-10 items-center rounded-2xl bg-slate-100 text-base md:flex md:text-lg">
+          <Link href="/home">
+            <Image
+              src="/logo.png"
+              width={80}
+              height={80}
+              className="object-cover"
+              alt="logo"
+            />
+          </Link>
+          <div className="hidden h-12 items-center rounded-2xl bg-slate-100 text-base md:flex md:text-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -40,7 +42,10 @@ export default function Navbar() {
           </div>
         </div>
         <div className="flex items-center gap-8">
-          <button className=" hidden gap-2 font-montserrat text-xl font-medium text-textNavbar hover:text-textNavbar hover:text-opacity-80 md:flex">
+          <Link
+            href="/write"
+            className=" hidden gap-2 font-montserrat text-xl font-medium text-textNavbar hover:text-textNavbar hover:text-opacity-80 md:flex"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -56,7 +61,7 @@ export default function Navbar() {
               />
             </svg>
             Write
-          </button>
+          </Link>
 
           <Dropdown />
         </div>
@@ -124,7 +129,8 @@ function Dropdown() {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link
+                    href="/write"
                     className={`${
                       active ? "bg-slate-100" : "text-textNavbar"
                     } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:hidden md:text-lg`}
@@ -144,7 +150,7 @@ function Dropdown() {
                       />
                     </svg>
                     Write
-                  </button>
+                  </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
@@ -173,36 +179,12 @@ function Dropdown() {
                   </Link>
                 )}
               </Menu.Item>
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? "bg-slate-100" : "text-textNavbar"
-                    } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="h-6 w-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"
-                      />
-                    </svg>
-                    Lists
-                  </button>
-                )}
-              </Menu.Item>
             </div>
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <button
+                  <Link
+                    href="/account/stories"
                     className={`${
                       active ? "bg-slate-100" : "text-textNavbar"
                     } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
@@ -222,7 +204,67 @@ function Dropdown() {
                       />
                     </svg>
                     Stories
-                  </button>
+                  </Link>
+                )}
+              </Menu.Item>
+
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/account/drafts"
+                    className={`${
+                      active ? "bg-slate-100" : "text-textNavbar"
+                    } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-6 w-6 text-textNavbar"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                      />
+                    </svg>
+                    Drafts
+                  </Link>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/account/drafts"
+                    className={`${
+                      active ? "bg-slate-100" : "text-textNavbar"
+                    } group flex w-full items-center gap-2 rounded-md px-2 py-3 text-base md:text-lg`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-6 w-6 text-textNavbar"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    History
+                  </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
